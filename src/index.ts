@@ -1,3 +1,9 @@
+/**
+ * Lexon - Fast, TypeScript-first string schema engine for validation and pattern rules.
+ *
+ * @packageDocumentation
+ */
+
 export { string } from "./schema/string";
 export { StringBuilder } from "./schema/builder";
 
