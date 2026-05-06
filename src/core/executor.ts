@@ -15,6 +15,38 @@ import {
   validateNoSpaces,
   explainNoSpaces
 } from "../rules/noSpaces";
+import {
+  validateExact,
+  explainExact
+} from "../rules/exact";
+import {
+  validateNoWhitespace,
+  explainNoWhitespace
+} from "../rules/noWhitespace";
+import {
+  validateStartsWith,
+  explainStartsWith
+} from "../rules/startsWith";
+import {
+  validateEndsWith,
+  explainEndsWith
+} from "../rules/endsWith";
+import {
+  validateContains,
+  explainContains
+} from "../rules/contains";
+import {
+  validateNotContains,
+  explainNotContains
+} from "../rules/notContains";
+import {
+  validateEquals,
+  explainEquals
+} from "../rules/equals";
+import {
+  validateRegex,
+  explainRegex
+} from "../rules/regex";
 
 export function execute(input: string, ast: ReadonlyArray<StringAstNode>): boolean {
   for (const node of ast) {
@@ -35,6 +67,22 @@ function executeNode(input: string, node: StringAstNode): boolean {
       return validateCharset(input, node);
     case "noSpaces":
       return validateNoSpaces(input, node);
+    case "exact":
+      return validateExact(input, node);
+    case "noWhitespace":
+      return validateNoWhitespace(input, node);
+    case "startsWith":
+      return validateStartsWith(input, node);
+    case "endsWith":
+      return validateEndsWith(input, node);
+    case "contains":
+      return validateContains(input, node);
+    case "notContains":
+      return validateNotContains(input, node);
+    case "equals":
+      return validateEquals(input, node);
+    case "regex":
+      return validateRegex(input, node);
     default: {
       node satisfies never;
       throw new Error(`Unknown AST node type: ${(node as { type: string }).type}`);
@@ -70,5 +118,21 @@ function explainNode(input: string, node: StringAstNode): string {
       return explainCharset(input, node);
     case "noSpaces":
       return explainNoSpaces(input, node);
+    case "exact":
+      return explainExact(input, node);
+    case "noWhitespace":
+      return explainNoWhitespace(input, node);
+    case "startsWith":
+      return explainStartsWith(input, node);
+    case "endsWith":
+      return explainEndsWith(input, node);
+    case "contains":
+      return explainContains(input, node);
+    case "notContains":
+      return explainNotContains(input, node);
+    case "equals":
+      return explainEquals(input, node);
+    case "regex":
+      return explainRegex(input, node);
   }
 }

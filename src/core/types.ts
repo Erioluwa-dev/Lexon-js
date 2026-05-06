@@ -5,7 +5,19 @@
 /**
  * AST node types for string validation rules.
  */
-export type AstNodeType = "min" | "max" | "charset" | "noSpaces";
+export type AstNodeType =
+  | "min"
+  | "max"
+  | "charset"
+  | "noSpaces"
+  | "exact"
+  | "noWhitespace"
+  | "startsWith"
+  | "endsWith"
+  | "contains"
+  | "notContains"
+  | "equals"
+  | "regex";
 
 /**
  * Base AST node structure.
@@ -50,9 +62,87 @@ export interface NoSpacesNode extends AstNode<"noSpaces"> {
 }
 
 /**
+ * AST node for exact length validation.
+ */
+export interface ExactNode extends AstNode<"exact"> {
+  /** Exact length required */
+  readonly length: number;
+}
+
+/**
+ * AST node for no-whitespace validation.
+ */
+export interface NoWhitespaceNode extends AstNode<"noWhitespace"> {
+  /** Whether strict mode - if false, only spaces are checked */
+  readonly strict: boolean;
+}
+
+/**
+ * AST node for startsWith validation.
+ */
+export interface StartsWithNode extends AstNode<"startsWith"> {
+  /** Required prefix */
+  readonly prefix: string;
+}
+
+/**
+ * AST node for endsWith validation.
+ */
+export interface EndsWithNode extends AstNode<"endsWith"> {
+  /** Required suffix */
+  readonly suffix: string;
+}
+
+/**
+ * AST node for contains validation.
+ */
+export interface ContainsNode extends AstNode<"contains"> {
+  /** Required substring */
+  readonly substring: string;
+}
+
+/**
+ * AST node for notContains validation.
+ */
+export interface NotContainsNode extends AstNode<"notContains"> {
+  /** Forbidden substring */
+  readonly substring: string;
+}
+
+/**
+ * AST node for equals validation.
+ */
+export interface EqualsNode extends AstNode<"equals"> {
+  /** Required exact value */
+  readonly value: string;
+}
+
+/**
+ * AST node for regex validation.
+ */
+export interface RegexNode extends AstNode<"regex"> {
+  /** Regular expression pattern */
+  readonly pattern: string;
+  /** Regex flags */
+  readonly flags?: string;
+}
+
+/**
  * Union type of all AST nodes.
  */
-export type StringAstNode = MinNode | MaxNode | CharsetNode | NoSpacesNode;
+export type StringAstNode =
+  | MinNode
+  | MaxNode
+  | CharsetNode
+  | NoSpacesNode
+  | ExactNode
+  | NoWhitespaceNode
+  | StartsWithNode
+  | EndsWithNode
+  | ContainsNode
+  | NotContainsNode
+  | EqualsNode
+  | RegexNode;
 
 /**
  * Result of schema compilation.

@@ -10,3 +10,7 @@ export function matchesCharset(input: string, pattern: string): boolean {
 export function hasSpaces(input: string): boolean {
   return /\s/.test(input);
 }
+
+export function hasWhitespace(input: string): boolean {
+  return /\s/.test(input);
+}
