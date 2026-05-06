@@ -21,3 +21,6 @@ npm-debug.log*
 # Lock files
 package-lock.json
 bun.lock
+
+MVP.md
+MVP.md

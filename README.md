@@ -44,6 +44,14 @@ Returns a `StringBuilder` for chaining validation rules.
 | `max(length)` | Maximum string length |
 | `charset(pattern, description)` | Character class restriction |
 | `noSpaces(strict?)` | Disallow whitespace |
+| `exact(length)` | Exact string length |
+| `noWhitespace(strict?)` | Disallow any whitespace (tabs, newlines) |
+| `startsWith(prefix)` | Must start with prefix |
+| `endsWith(suffix)` | Must end with suffix |
+| `contains(substring)` | Must contain substring |
+| `notContains(substring)` | Must not contain substring |
+| `equals(value)` | Must equal exact value |
+| `regex(pattern, flags?)` | Match custom regex pattern |
 
 ### Methods
 

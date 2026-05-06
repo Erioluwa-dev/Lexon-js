@@ -13,6 +13,15 @@ const schema = string()
   .charset("a-zA-Z0-9_", "alphanumeric")
   .noSpaces()
   .compile();
+
+// Example with Phase 1 rules
+const emailSchema = string()
+  .min(5)
+  .max(100)
+  .contains("@")
+  .notContains(" ")
+  .noWhitespace()
+  .compile();
 ```
 
 ### Methods
@@ -51,6 +60,78 @@ Disallows whitespace characters (space, tab, newline, etc.).
 ```typescript
 string().noSpaces().compile().validate("helloworld"); // true
 string().noSpaces().compile().validate("hello world"); // false
+```
+
+#### `exact(length: number): this`
+
+Requires exact string length.
+
+```typescript
+string().exact(5).compile().validate("hello"); // true
+string().exact(5).compile().validate("hi"); // false
+```
+
+#### `noWhitespace(strict?: boolean): this`
+
+Disallows all whitespace characters (space, tab, newline, carriage return).
+
+```typescript
+string().noWhitespace().compile().validate("helloworld"); // true
+string().noWhitespace().compile().validate("hello\tworld"); // false
+```
+
+#### `startsWith(prefix: string): this`
+
+Requires string to start with prefix.
+
+```typescript
+string().startsWith("hello").compile().validate("hello world"); // true
+string().startsWith("hello").compile().validate("world hello"); // false
+```
+
+#### `endsWith(suffix: string): this`
+
+Requires string to end with suffix.
+
+```typescript
+string().endsWith("world").compile().validate("hello world"); // true
+string().endsWith("world").compile().validate("world hello"); // false
+```
+
+#### `contains(substring: string): this`
+
+Requires string to contain substring.
+
+```typescript
+string().contains("hello").compile().validate("hello world"); // true
+string().contains("hello").compile().validate("world"); // false
+```
+
+#### `notContains(substring: string): this`
+
+Requires string to NOT contain substring.
+
+```typescript
+string().notContains("hello").compile().validate("world"); // true
+string().notContains("hello").compile().validate("hello world"); // false
+```
+
+#### `equals(value: string): this`
+
+Requires string to equal exact value.
+
+```typescript
+string().equals("hello").compile().validate("hello"); // true
+string().equals("hello").compile().validate("world"); // false
+```
+
+#### `regex(pattern: string, flags?: string): this`
+
+Matches string against custom regex pattern (escape hatch).
+
+```typescript
+string().regex("^\\d+$").compile().validate("12345"); // true
+string().regex("^\\d+$", "i").compile().validate("TEST"); // depends on pattern
 ```
 
 ### `compile(): CompiledSchema`

@@ -31,6 +31,27 @@ lexon/
       max.ts
       charset.ts
       noSpaces.ts
+      exact.ts
+      noWhitespace.ts
+      startsWith.ts
+      endsWith.ts
+      contains.ts
+      notContains.ts
+      equals.ts
+      regex.ts
+```
+lexon/
+  src/
+    core/
+      ast.ts
+      compiler.ts
+      executor.ts
+      types.ts
+    rules/
+      min.ts
+      max.ts
+      charset.ts
+      noSpaces.ts
     utils/
       string.ts
       errors.ts
@@ -109,14 +130,23 @@ lexon/
 * Prefer clarity over clever abstractions.
 * Add features only when a real use case exists.
 
-## MVP Scope
+## Phase 1 Scope (Completed)
 
 ### Include
 
 * String schema builder.
-* `min`, `max`, `charset`, `noSpaces` rules.
+* `min`, `max`, `charset`, `noSpaces` rules (MVP).
+* `exact`, `noWhitespace`, `startsWith`, `endsWith`, `contains`, `notContains`, `equals`, `regex` rules (Phase 1).
 * `.compile()`.
 * `.explain()`.
+
+### Phase 2 Preview (Planned)
+
+* `ref(schema)` - Reuse existing schema
+* `clone()` - Immutable branching
+* `pipe(...rules)` - Rule chaining
+* `extend(schema)` - Schema inheritance
+* `merge(schemaA, schemaB)` - Combine constraints
 
 ### Exclude
 
