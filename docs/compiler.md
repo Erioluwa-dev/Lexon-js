@@ -50,9 +50,9 @@ string()
 
 The executor iterates through AST nodes and dispatches to rule-specific validators:
 
-1. For each node in the AST, call the corresponding `validateX` function
-2. If any rule fails, stop and return `false`
-3. If all rules pass, return `true`
+1. For each node in the AST, call the corresponding `validateX` function.
+2. If any rule fails, stop and return `false`.
+3. If all rules pass, return `true`.
 
 ```typescript
 function execute(input: string, ast: StringAstNode[]): boolean {
@@ -67,6 +67,8 @@ function execute(input: string, ast: StringAstNode[]): boolean {
 
 ## Performance Characteristics
 
-- **Compile time**: O(n) where n is number of rules
-- **Runtime**: O(n) where n is number of rules (each rule executes in O(m) where m is input length for charset/min/max rules)
-- **Memory**: O(1) for compiled schema (AST is stored once)
+| Metric | Complexity |
+|--------|------------|
+| **Compile time** | O(*n*) where *n* is number of rules |
+| **Runtime** | O(*n* × *m*) where *n* is number of rules, *m* is input length |
+| **Memory** | O(*n*) — AST is stored once |
