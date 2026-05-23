@@ -40,7 +40,7 @@ describe("string builder integration", () => {
 
 ### Edge Case Tests (`tests/edge/`)
 
-Test boundary conditions and unusual inputs.
+Test boundary conditions and unusual inputs:
 
 - Empty strings
 - Unicode characters
@@ -70,13 +70,14 @@ npm test
 # Watch mode
 npm run test:watch
 
-# Run specific test file
+# Run a specific test file
 npx vitest tests/unit/min.test.ts
 ```
 
 ## Test Coverage
 
 Aim for 100% coverage of:
+
 - All rule validators
 - All rule explainers
 - Builder methods

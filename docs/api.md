@@ -14,7 +14,7 @@ const schema = string()
   .noSpaces()
   .compile();
 
-// Example with Phase 1 rules
+// Example with all rules
 const emailSchema = string()
   .min(5)
   .max(100)
@@ -23,6 +23,8 @@ const emailSchema = string()
   .noWhitespace()
   .compile();
 ```
+
+---
 
 ### Methods
 
@@ -109,7 +111,7 @@ string().contains("hello").compile().validate("world"); // false
 
 #### `notContains(substring: string): this`
 
-Requires string to NOT contain substring.
+Requires string to **not** contain substring.
 
 ```typescript
 string().notContains("hello").compile().validate("world"); // true
@@ -134,6 +136,8 @@ string().regex("^\\d+$").compile().validate("12345"); // true
 string().regex("^\\d+$", "i").compile().validate("TEST"); // depends on pattern
 ```
 
+---
+
 ### `compile(): CompiledSchema`
 
 Compiles the schema into a validator function.
@@ -144,7 +148,7 @@ schema.validate("hello"); // true
 schema.validate("hi"); // false
 ```
 
-Returns `{ validate: (input: string) => boolean, ast: StringAstNode[] }`
+Returns `{ validate: (input: string) => boolean, ast: StringAstNode[] }`.
 
 ### `getExplain(): (input: string) => ExplainResult`
 
@@ -156,7 +160,7 @@ const result = explain("hi");
 // { valid: false, error: { message: "String length 2 is less than minimum 5" }, input: "hi" }
 ```
 
-## `explain(input: string, ast: StringAstNode[]): ExplainResult`
+### `explain(input: string, ast: StringAstNode[]): ExplainResult`
 
 Standalone explain function for debugging validation failures.
 
