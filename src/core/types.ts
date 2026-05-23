@@ -17,7 +17,8 @@ export type AstNodeType =
   | "contains"
   | "notContains"
   | "equals"
-  | "regex";
+  | "regex"
+  | "ref";
 
 /**
  * Base AST node structure.
@@ -142,7 +143,8 @@ export type StringAstNode =
   | ContainsNode
   | NotContainsNode
   | EqualsNode
-  | RegexNode;
+  | RegexNode
+  | RefNode;
 
 /**
  * Result of schema compilation.
@@ -150,8 +152,12 @@ export type StringAstNode =
 export interface CompiledSchema {
   /** The validator function */
   readonly validate: (input: string) => boolean;
+  /** Parse input with typed result (success or detailed error) */
+  readonly parse: (input: string) => SafeParseResult;
   /** The AST used for compilation */
   readonly ast: ReadonlyArray<StringAstNode>;
+  /** Get an explain function bound to this schema */
+  readonly getExplain: () => (input: string) => ExplainResult;
 }
 
 /**
@@ -190,9 +196,25 @@ export interface ExplainResult {
 }
 
 /**
+ * AST node for schema reference (composition).
+ */
+export interface RefNode extends AstNode<"ref"> {
+  /** The referenced schema's AST */
+  readonly refAst: ReadonlyArray<StringAstNode>;
+}
+
+/**
  * Schema configuration options.
  */
 export interface SchemaOptions {
   /** Enable detailed error messages */
   readonly explain?: boolean;
 }
+
+/**
+ * Result of a parse() operation.
+ * Returns either validated data or detailed error information.
+ */
+export type SafeParseResult =
+  | { readonly success: true; readonly data: string }
+  | { readonly success: false; readonly error: ExplainResult };

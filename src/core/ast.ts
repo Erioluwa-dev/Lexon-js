@@ -11,7 +11,8 @@ import type {
   ContainsNode,
   NotContainsNode,
   EqualsNode,
-  RegexNode
+  RegexNode,
+  RefNode
 } from "./types";
 
 export function minAst(length: number): MinNode {
@@ -62,6 +63,10 @@ export function regexAst(pattern: string, flags?: string): RegexNode {
   return { type: "regex", pattern, flags };
 }
 
+export function refAst(refAst: ReadonlyArray<StringAstNode>): RefNode {
+  return { type: "ref", refAst };
+}
+
 /**
  * Type guard for AST nodes.
  */
@@ -80,6 +85,7 @@ export function isAstNode(node: unknown): node is StringAstNode {
     n.type === "contains" ||
     n.type === "notContains" ||
     n.type === "equals" ||
-    n.type === "regex"
+    n.type === "regex" ||
+    n.type === "ref"
   );
 }

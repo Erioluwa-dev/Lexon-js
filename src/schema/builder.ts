@@ -11,7 +11,8 @@ import {
   containsAst,
   notContainsAst,
   equalsAst,
-  regexAst
+  regexAst,
+  refAst
 } from "../core/ast";
 import { compile, createExplain } from "../core/compiler";
 
@@ -113,6 +114,23 @@ export class StringBuilder {
       throw new TypeError(`regex() requires a non-empty pattern string`);
     }
     this.#state.ast.push(regexAst(pattern, flags));
+    return this;
+  }
+
+  length(min: number, max: number): this {
+    return this.min(min).max(max);
+  }
+
+  alphanumeric(): this {
+    return this.charset("a-zA-Z0-9", "alphanumeric");
+  }
+
+  numeric(): this {
+    return this.charset("0-9", "numeric");
+  }
+
+  ref(schema: CompiledSchema): this {
+    this.#state.ast.push(refAst(schema.ast));
     return this;
   }
 

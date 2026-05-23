@@ -10,6 +10,7 @@ export { StringBuilder } from "./schema/builder";
 export type {
   CompiledSchema,
   ExplainResult,
+  SafeParseResult,
   StringAstNode,
   MinNode,
   MaxNode,
@@ -23,6 +24,7 @@ export type {
   NotContainsNode,
   EqualsNode,
   RegexNode,
+  RefNode,
   AstNode,
   AstNodeType,
   ValidationResult,

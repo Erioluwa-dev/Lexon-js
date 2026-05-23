@@ -83,6 +83,8 @@ function executeNode(input: string, node: StringAstNode): boolean {
       return validateEquals(input, node);
     case "regex":
       return validateRegex(input, node);
+    case "ref":
+      return execute(input, node.refAst);
     default: {
       node satisfies never;
       throw new Error(`Unknown AST node type: ${(node as { type: string }).type}`);
@@ -134,5 +136,9 @@ function explainNode(input: string, node: StringAstNode): string {
       return explainEquals(input, node);
     case "regex":
       return explainRegex(input, node);
+    case "ref": {
+      const refResult = explain(input, node.refAst);
+      return refResult.error?.message ?? "Referenced schema validation failed";
+    }
   }
 }
