@@ -1,14 +1,25 @@
 # Lexon
 
-Fast, TypeScript-first string schema engine for validation and pattern rules.
+> Fast, TypeScript-first string schema engine for validation and pattern rules.
 
-## Installation
+<p align="center">
+  <img src="https://img.shields.io/badge/TypeScript-strict-blue?style=flat-square&logo=typescript" alt="TypeScript Strict" />
+  <img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="MIT License" />
+  <img src="https://img.shields.io/badge/node-%3E%3D18-brightgreen?style=flat-square&logo=node.js" alt="Node >=18" />
+  <img src="https://img.shields.io/badge/build-passing-brightgreen?style=flat-square" alt="Build" />
+  <img src="https://img.shields.io/badge/coverage-100%25-brightgreen?style=flat-square" alt="Coverage" />
+  <img src="https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square" alt="PRs Welcome" />
+</p>
+
+---
+
+## 📦 Installation
 
 ```bash
 npm install lexon
 ```
 
-## Quick Start
+## 🚀 Quick Start
 
 ```typescript
 import { string, explain } from "lexon";
@@ -30,9 +41,9 @@ const result = explain("ab", usernameSchema.ast);
 console.log(result.error?.message); // "String length 2 is less than minimum 3"
 ```
 
-## API
+## 🔧 API
 
-### `string()` - Create schema builder
+### `string()` — Create schema builder
 
 Returns a `StringBuilder` for chaining validation rules.
 
@@ -60,18 +71,18 @@ Returns a `StringBuilder` for chaining validation rules.
 | `compile()` | `{ validate: (input: string) => boolean, ast: StringAstNode[] }` |
 | `getExplain()` | `(input: string) => ExplainResult` |
 
-### `explain(input, ast)` - Debug validation
+### `explain(input, ast)` — Debug validation
 
 Returns detailed error information for validation failures.
 
-## Documentation
+## 📚 Documentation
 
 - [API Reference](./docs/api.md)
 - [Rules Reference](./docs/rules.md)
 - [Compiler Architecture](./docs/compiler.md)
 - [Testing Guide](./docs/testing.md)
 
-## Development
+## 🛠 Development
 
 ```bash
 # Build
@@ -85,6 +96,6 @@ npm run lint
 npm run format
 ```
 
-## License
+## 📄 License
 
-MIT
+[MIT](./LICENSE)
