@@ -1,4 +1,4 @@
-import type { StringAstNode, CompiledSchema, ExplainResult } from "./types";
+import type { StringAstNode, CompiledSchema, ExplainResult, SafeParseResult } from "./types";
 import { execute, explain } from "./executor";
 
 /**
@@ -14,21 +14,29 @@ export interface CompilerOptions {
  */
 export function compile(
   ast: ReadonlyArray<StringAstNode>,
-  options?: CompilerOptions
+  _options?: CompilerOptions
 ): CompiledSchema {
-  if (options?.explain) {
-    return {
-      validate: ((input: string): input is string => execute(input, ast)) as (input: string) => input is string,
-      ast
-    };
-  }
+  const validate = (input: string): boolean => execute(input, ast);
+  const explainBound = (input: string): ExplainResult => explain(input, ast);
 
-  const validate = (input: string): input is string => execute(input, ast);
-  return { validate, ast };
+  const parseFn = (input: string): SafeParseResult => {
+    const result = explain(input, ast);
+    if (result.valid) {
+      return { success: true, data: input };
+    }
+    return { success: false, error: result };
+  };
+
+  return {
+    validate,
+    parse: parseFn,
+    ast,
+    getExplain: () => explainBound
+  };
 }
 
 /**
- * Creates an explain function bound to the compiled schema.
+ * Creates an explain function bound to the given AST.
  */
 export function createExplain(
   ast: ReadonlyArray<StringAstNode>

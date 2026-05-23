@@ -23,7 +23,15 @@
     "typecheck": "tsc --noEmit"
   },
   "keywords": ["validation", "schema", "string", "validator", "typescript"],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Erioluwa-dev/Lexon-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Erioluwa-dev/Lexon-js/issues"
+  },
+  "homepage": "https://github.com/Erioluwa-dev/Lexon-js#readme",
+  "author": "Erioluwa Fawehinmi",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^25.6.0",
