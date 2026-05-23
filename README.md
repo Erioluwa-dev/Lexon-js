@@ -13,13 +13,13 @@
 
 ---
 
-## 📦 Installation
+## Installation
 
 ```bash
 npm install lexon
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ```typescript
 import { string, explain } from "lexon";
@@ -41,7 +41,7 @@ const result = explain("ab", usernameSchema.ast);
 console.log(result.error?.message); // "String length 2 is less than minimum 3"
 ```
 
-## 🔧 API
+## API
 
 ### `string()` — Create schema builder
 
@@ -75,14 +75,14 @@ Returns a `StringBuilder` for chaining validation rules.
 
 Returns detailed error information for validation failures.
 
-## 📚 Documentation
+## Documentation
 
 - [API Reference](./docs/api.md)
 - [Rules Reference](./docs/rules.md)
 - [Compiler Architecture](./docs/compiler.md)
 - [Testing Guide](./docs/testing.md)
 
-## 🛠 Development
+## Development
 
 ```bash
 # Build
@@ -96,6 +96,6 @@ npm run lint
 npm run format
 ```
 
-## 📄 License
+## License
 
 [MIT](./LICENSE)
